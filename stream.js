@@ -24,6 +24,10 @@ function Stream(dbs, options) {
   var opts = extend({}, defaults, options);
   this._dbs = dbs;
 
+  if (typeof opts.wrapperFunctions === 'object') {
+    methodWrapper = extend(methodWrapper, opts.wrapperFunctions);
+  }
+
   if (typeof opts.databases !== 'function') {
     if (!Array.isArray(opts.databases)) {
       opts.databases = [opts.databases];
